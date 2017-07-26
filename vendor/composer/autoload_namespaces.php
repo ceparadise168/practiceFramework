@@ -6,4 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'VDB\\Uri\\Tests' => array($vendorDir . '/vdb/uri/tests'),
+    'VDB\\Uri' => array($vendorDir . '/vdb/uri/src'),
+    'VDB\\Spider\\Tests' => array($vendorDir . '/vdb/php-spider/tests'),
+    'VDB\\Spider' => array($vendorDir . '/vdb/php-spider/src'),
 );

@@ -1,5 +1,8 @@
 {
     "require": {
-        "symfony/http-foundation": "^3.3"
+        "symfony/http-foundation": "^3.3",
+        "symfony/event-dispatcher": "^3.3",
+        "symfony/dom-crawler": "^3.3",
+        "vdb/php-spider": "^0.3.0"
     }
 }
