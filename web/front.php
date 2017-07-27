@@ -11,8 +11,7 @@ function render_template($request)
     extract($request->attributes->all(), EXTR_SKIP);
     ob_start();
     include sprintf(__DIR__.'/../src/pages/%s.php', $_route);
-
-    return new Respnse(ob_get_clean());
+    return new Response(ob_get_clean());
 }
 
 $request = Request::createFromGlobals();
@@ -28,7 +27,6 @@ $context->fromRequest($request);
  * filter route from routes in app.php whitch mathchs the request context
  */
 $matcher = new Routing\Matcher\UrlMatcher($routes, $context);
-
 /**
  * Based on the information stored in the RouteCollection instance whitch in the app.php,
  * a UrlMatcher instance can match URL paths.
