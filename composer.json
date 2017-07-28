@@ -6,5 +6,8 @@
         "vdb/php-spider": "^0.3.0",
         "symfony/routing": "^3.3",
         "symfony/http-kernel": "^3.3"
+    },
+    "autoload": {
+        "psr-4": { "": "src/"}
     }
 }
