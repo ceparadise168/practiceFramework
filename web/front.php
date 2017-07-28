@@ -54,7 +54,11 @@ try {
 */
 
 $framework = new Simplex\Framework($matcher, $controllerResolver, $argumentResolver);
-//var_dump($framework);
+//var_dump($framework->handle($request));
 $resposne = $framework->handle($request);
 //var_dump($response);
-$response->send();
+//$response->send();
+$a = $framework->handle($request);
+//var_dump($a);
+$a->send();
+//$framework->handle($request)->send();
