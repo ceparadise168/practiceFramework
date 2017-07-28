@@ -6,6 +6,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing;
 use Symfony\Component\HttpKernel;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+
+$dispatcher = new EventDispatcher();
+$dispatcher->addListener('response', function (Simplex\ResponseEvent $event) {
+    $response = $event->getResponse();
+
+    if (
+        $response->isRedirection()
+        || ($response->headers->has('Content-Type') && false === strpos($response->headers->get('Content-Type'), 'html'))
+        || 'html' !== $event->getRequest()->getRequestFormat()
+        ) {
+            return;
+        }
+        $response->setContent($response->getContent().'GA CODE');
+});
 
 function render_template(Request $request)
 {
@@ -33,32 +48,6 @@ $matcher = new Routing\Matcher\UrlMatcher($routes, $context);
 $controllerResolver = new HttpKernel\Controller\ControllerResolver();
 $argumentResolver = new HttpKernel\Controller\ArgumentResolver();
 
-/**
- * Based on the information stored in the RouteCollection instance whitch in the app.php,
- * a UrlMatcher instance can match URL paths.
- */ 
-/*
-try {
-    $request->attributes->add($matcher->match($request->getPathInfo()));
-
-    $controller = $controllerResolver->getController($request);
-    $arguments = $argumentResolver->getArguments($request, $controller);
-
-    $response = call_user_func_array($controller, $arguments);
-   // $response = call_user_func($request->attributes->get('_controller'), $request);
-} catch (Routing\Exception\ResourceNotFoundException $e) {
-    $response = new Response('Not Found', 404);
-} catch (Exception $e) {
-    $response = new Response('An error occurred', 500);
-}
-*/
-
-$framework = new Simplex\Framework($matcher, $controllerResolver, $argumentResolver);
-//var_dump($framework->handle($request));
+$framework = new Simplex\Framework($matcher, $controllerResolver, $argumentResolver, $dispatcher);
 $response = $framework->handle($request);
-//var_dump($response);
 $response->send();
-//$a = $framework->handle($request);
-//var_dump($a);
-//$a->send();
-//$framework->handle($request)->send();

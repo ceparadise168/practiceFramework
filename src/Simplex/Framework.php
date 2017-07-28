@@ -47,6 +47,6 @@ class Framework
         }
         $this->dispatcher->dispatch('response', new ResponseEvent($response, $request));
 
-        return $resposne;
+        return $response;
     }
 }
