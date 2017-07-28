@@ -8,6 +8,7 @@ use Symfony\Component\Routing;
 use Symfony\Component\HttpKernel;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
+/*
 $dispatcher = new EventDispatcher();
 $dispatcher->addListener('response', function (Simplex\ResponseEvent $event) {
     $response = $event->getResponse();
@@ -21,6 +22,13 @@ $dispatcher->addListener('response', function (Simplex\ResponseEvent $event) {
         }
         $response->setContent($response->getContent().'GA CODE');
 });
+*/
+
+$dispatcher = new EventDispatcher();
+$dispatcher->addListener('response', array(new Simplex\ContentLengthListener(), 'onResponse'), -255);
+$dispatcher->addListener('response', array(new Simplex\GoogleListener(), 'onResponse'));
+
+
 
 function render_template(Request $request)
 {
