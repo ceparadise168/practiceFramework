@@ -54,7 +54,8 @@ $routes->add(
     new Routing\Route('/is_leap_year/{year}',
     array(
         'year' => null,
-        '_controller' => array (new LeapYearController(), 'indexAction'),
+        //'_controller' => array (new LeapYearController(), 'indexAction'),
+        '_controller' => 'Calendar\Controller\LeapYearController::indexAction',
 )));
 
 return $routes;

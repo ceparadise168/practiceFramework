@@ -34,7 +34,7 @@ class Framework
 
             $controller = $this->controllerResolver->getController($request);
             $arguments = $this->argumentResolver->getArguments($request, $controller);
-
+var_dump(call_user_func_array($controller, $arguments));
             return call_user_func_array($controller, $arguments);
         } catch (ResourceNotFoundException $e) {
             return new Response('Not Found', 404);
