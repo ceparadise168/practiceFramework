@@ -37,6 +37,7 @@ $argumentResolver = new HttpKernel\Controller\ArgumentResolver();
  * Based on the information stored in the RouteCollection instance whitch in the app.php,
  * a UrlMatcher instance can match URL paths.
  */ 
+/*
 try {
     $request->attributes->add($matcher->match($request->getPathInfo()));
 
@@ -50,5 +51,9 @@ try {
 } catch (Exception $e) {
     $response = new Response('An error occurred', 500);
 }
+*/
+
+$framework = new Simplex\Framework($matcher, $controllerResolver, $argumentResolver);
+$resposne = $framework->handle($request);
 
 $response->send();
