@@ -25,9 +25,12 @@ $dispatcher->addListener('response', function (Simplex\ResponseEvent $event) {
 */
 
 $dispatcher = new EventDispatcher();
+/*
 $dispatcher->addListener('response', array(new Simplex\ContentLengthListener(), 'onResponse'), -255);
 $dispatcher->addListener('response', array(new Simplex\GoogleListener(), 'onResponse'));
-
+*/
+$dispatcher->addSubscriber(new Simplex\ContentLengthListener());
+$dispatcher->addSubscriber(new Simplex\GoogleListener());
 
 
 function render_template(Request $request)
